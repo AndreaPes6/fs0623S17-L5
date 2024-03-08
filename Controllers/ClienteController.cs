@@ -44,5 +44,45 @@ namespace HotelSoloRicchi.Controllers
 
             return View(clienti);
         }
+
+        public ActionResult Add()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(Cliente cliente
+            )
+        {
+            if (ModelState.IsValid)
+            {
+                string connString = ConfigurationManager.ConnectionStrings["HotelSoloRicchiDB"].ToString();
+                var conn = new SqlConnection(connString);
+                conn.Open();
+                var command = new SqlCommand(@"
+                    INSERT INTO Clienti
+                    (Nome, Cognome, Email, CF, Provincia, Città, NumeroTelefono)
+                    OUTPUT INSERTED.ID
+                    VALUES (@nome, @cognome, @email, @cf, @provincia, @città, @numerotelefono)
+                ", conn);
+
+                command.Parameters.AddWithValue("@nome", cliente.Nome);
+                command.Parameters.AddWithValue("@cognome", cliente.Cognome);
+                command.Parameters.AddWithValue("@email", cliente.Email);
+                command.Parameters.AddWithValue("@cf", cliente.CF);
+                command.Parameters.AddWithValue("@provincia", cliente.Provincia);
+                command.Parameters.AddWithValue("@città", cliente.Città);
+                command.Parameters.AddWithValue("@numerotelefono", cliente.NumeroTelefono);
+
+
+                var clienteId = command.ExecuteScalar();
+
+                return RedirectToAction("Index", "Cliente", new { id = clienteId });
+            }
+
+            return View(cliente);
+        }
     }
 }

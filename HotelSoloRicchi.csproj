@@ -191,6 +191,8 @@
     <Content Include="Views\Prenotazione\Index.cshtml" />
     <Content Include="Views\Stanze\Index.cshtml" />
     <Content Include="Views\Cliente\Index.cshtml" />
+    <Content Include="Views\Prenotazione\Add.cshtml" />
+    <Content Include="Views\Cliente\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

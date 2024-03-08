@@ -54,6 +54,13 @@ namespace HotelSoloRicchi.Controllers
             return View(prenotazioni);
         }
 
+        public ActionResult Add()
+        {
+            return View();
+        }
+
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Add(Prenotazione prenotazione)
@@ -67,20 +74,27 @@ namespace HotelSoloRicchi.Controllers
                     INSERT INTO Prenotazione
                     (IDCliente, IDStanza, Anno, NumeroPrenotazione, DataPrenotazione, CheckIn, CheckOut, Caparra, Tariffa, PensioneOmezza, Colazione)
                     OUTPUT INSERTED.ID
-                    VALUES (@IDCliente, @IDStanza, @Anno, @NumeroPrenotazione, @DataPrenotazione)
+                    VALUES (@idcliente, @idstanza, @anno, @numeroprenotazione, @dataprenotazione, @checkin, @checkout, @caparra, @tariffa, @pensioneomezza, @colazione)
                 ", conn);
 
-                command.Parameters.AddWithValue("@title", post.Title);
-                command.Parameters.AddWithValue("@contents", post.Contents);
-                command.Parameters.AddWithValue("@categoryId", post.CategoryId);
-                command.Parameters.AddWithValue("@authorId", HttpContext.User.Identity.Name);
-                var postId = command.ExecuteScalar();
+                command.Parameters.AddWithValue("@idcliente", prenotazione.IdCliente);
+                command.Parameters.AddWithValue("@idstanza", prenotazione.IdStanza);
+                command.Parameters.AddWithValue("@anno", prenotazione.Anno);
+                command.Parameters.AddWithValue("@numeroprenotazione", prenotazione.NumeroPrenotazione);
+                command.Parameters.AddWithValue("@dataprenotazione", prenotazione.DataPrenotazione);
+                command.Parameters.AddWithValue("@checkin", prenotazione.CheckIn);
+                command.Parameters.AddWithValue("@checkout", prenotazione.CheckOut);
+                command.Parameters.AddWithValue("@caparra", prenotazione.Caparra);
+                command.Parameters.AddWithValue("@tariffa", prenotazione.Tariffa);
+                command.Parameters.AddWithValue("@pensioneomezza", prenotazione.PensioneOmezza);
+                command.Parameters.AddWithValue("@colazione", prenotazione.Colazione);
 
-                return RedirectToAction("Show", new { id = postId });
+                var prenotazioneId = command.ExecuteScalar();
+
+                return RedirectToAction("Index", "Prenotazione", new { id = prenotazioneId });
             }
 
-            // TODO: serve anche la lista delle categorie risolvere con TempData?
-            return View(post);
+            return View(prenotazione);
         }
 
 

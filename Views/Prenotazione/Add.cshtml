@@ -1,0 +1,82 @@
+﻿@model HotelSoloRicchi.Models.Prenotazione
+
+@{
+    ViewBag.Title = "Aggiungi una Prenotazione";
+}
+
+<h2>Aggiungi Una Prenotazione</h2>
+
+
+
+@using (Html.BeginForm("Add", "Prenotazione", FormMethod.Post, new { enctype = "multipart/form-data", id = "prenotazioneForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.IdCliente, "ID Cliente")
+        @Html.TextBoxFor(model => model.IdCliente, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.IdCliente, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.IdStanza, "ID Stanza")
+        @Html.TextBoxFor(model => model.IdStanza, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.IdStanza, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Anno)
+        @Html.TextBoxFor(model => model.Anno, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Anno, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NumeroPrenotazione, "Numero Prenotazione")
+        @Html.TextBoxFor(model => model.NumeroPrenotazione, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.NumeroPrenotazione, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DataPrenotazione, "Data Prenotazione")
+        @Html.TextBoxFor(model => model.DataPrenotazione, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+        @Html.ValidationMessageFor(model => model.DataPrenotazione, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CheckIn, "Check-in")
+        @Html.TextBoxFor(model => model.CheckIn, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+        @Html.ValidationMessageFor(model => model.CheckIn, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CheckOut, "Check-out")
+        @Html.TextBoxFor(model => model.CheckOut, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+        @Html.ValidationMessageFor(model => model.CheckOut, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Caparra)
+        @Html.TextBoxFor(model => model.Caparra, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Caparra, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Tariffa)
+        @Html.TextBoxFor(model => model.Tariffa, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Tariffa, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PensioneOmezza, "Pensione Completa o Mezza Pensione")
+        @Html.CheckBoxFor(model => model.PensioneOmezza, new { @class = "form-check-input" })
+        @Html.ValidationMessageFor(model => model.PensioneOmezza, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Colazione)
+        @Html.CheckBoxFor(model => model.Colazione, new { @class = "form-check-input" })
+        @Html.ValidationMessageFor(model => model.Colazione, "", new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Aggiungi</button>
+}
