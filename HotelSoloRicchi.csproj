@@ -193,6 +193,7 @@
     <Content Include="Views\Cliente\Add.cshtml" />
     <Content Include="Views\Prenotazione\Edit.cshtml" />
     <Content Include="Views\Cliente\Edit.cshtml" />
+    <Content Include="Views\Prenotazione\Checkout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -37,6 +37,7 @@ else
                     <th>Tariffa</th>
                     <th>Pensione o Mezza</th>
                     <th>Colazione</th>
+                    <th>Ceckout</th>
                     <th>Modifica</th>
                     <th>Elimina</th>
 
@@ -58,6 +59,9 @@ else
                         <td>@prenotazione.Tariffa</td>
                         <td>@(prenotazione.PensioneOmezza ? "Pensione" : "Mezza")</td>
                         <td>@(prenotazione.Colazione ? "Sì" : "No")</td>
+                        <td>
+                            @Html.ActionLink("Checkout", "Checkout", new { id = prenotazione.Id }, new { @class = "btn btn-success" })
+                        </td>
                         <td>
                             <a href="@Url.Action("Edit", "Prenotazione", new { id = prenotazione.Id })" class="btn btn-primary">Modifica</a>
                         </td>

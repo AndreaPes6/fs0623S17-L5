@@ -209,6 +209,60 @@ namespace HotelSoloRicchi.Controllers
             }
         }
 
+        public ActionResult Checkout(int id)
+        {
+            string connString = ConfigurationManager.ConnectionStrings["HotelSoloRicchiDB"].ToString();
+            using (var conn = new SqlConnection(connString))
+            {
+                conn.Open();
+
+                // Creare il comando per ottenere i dettagli della prenotazione
+                var command = new SqlCommand(@"
+            SELECT * FROM Prenotazione
+            WHERE ID = @prenotazioneid
+        ", conn);
+                command.Parameters.AddWithValue("@prenotazioneid", id);
+
+                // Eseguire il DataReader per ottenere i dettagli della prenotazione
+                var reader = command.ExecuteReader();
+
+                if (!reader.HasRows)
+                {
+                    return HttpNotFound();
+                }
+
+                var prenotazione = new Prenotazione();
+                while (reader.Read())
+                {
+                    prenotazione.Id = (int)reader["Id"];
+                    prenotazione.IdCliente = (int)reader["IdCliente"];
+                    prenotazione.IdStanza = (int)reader["IdStanza"];
+                    prenotazione.Anno = (int)reader["Anno"];
+                    prenotazione.NumeroPrenotazione = (int)reader["NumeroPrenotazione"];
+                    prenotazione.DataPrenotazione = (DateTime)reader["DataPrenotazione"];
+                    prenotazione.CheckIn = (DateTime)reader["CheckIn"];
+                    prenotazione.CheckOut = (DateTime)reader["CheckOut"];
+                    prenotazione.Caparra = (decimal)reader["Caparra"];
+                    prenotazione.Tariffa = (decimal)reader["Tariffa"];
+                    prenotazione.PensioneOmezza = (bool)reader["PensioneOmezza"];
+                    prenotazione.Colazione = (bool)reader["Colazione"];
+                }
+
+                // Chiudere il DataReader
+                reader.Close();
+
+                // Calcola la somma totale (Tariffa - Caparra)
+                decimal sommaTotale = prenotazione.Tariffa - prenotazione.Caparra;
+
+                // Aggiungi la somma totale alla vista
+                ViewBag.SommaTotale = sommaTotale;
+
+                return View(prenotazione);
+            }
+        }
+
+
+
 
 
     }

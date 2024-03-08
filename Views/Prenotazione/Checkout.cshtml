@@ -1,0 +1,47 @@
+﻿@model HotelSoloRicchi.Models.Prenotazione
+
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<h2>Dettagli della Prenotazione</h2>
+
+<table class="table">
+    <tr>
+        <th>Numero di Stanza</th>
+        <td>@Model.IdStanza</td>
+    </tr>
+    <tr>
+        <th>Periodo</th>
+        <td>@Model.CheckIn.ToShortDateString() - @Model.CheckOut.ToShortDateString()</td>
+    </tr>
+    <tr>
+        <th>Tariffa Applicata</th>
+        <td>@Model.Tariffa</td>
+    </tr>
+    <tr>
+        <th>Servizi Aggiuntivi</th>
+        <td>
+            @if (Model.PensioneOmezza)
+            {
+                <p>Pensione a Metà</p>
+            }
+            @if (Model.Colazione)
+            {
+                <p>Colazione</p>
+            }
+            @{
+                // Aggiungi qui altri servizi aggiuntivi se necessario
+            }
+        </td>
+    </tr>
+    <tr>
+        <th>Importo da Saldare</th>
+        <td>@(Model.Tariffa - Model.Caparra)</td>
+    </tr>
+</table>
+
+<form action="@Url.Action("Index", "Prenotazione", new { id = Model.Id })" method="post">
+    @Html.HttpMethodOverride(HttpVerbs.Delete)
+    <button type="submit" class="btn btn-success">Conferma Checkout</button>
+</form>

@@ -47,5 +47,7 @@ namespace HotelSoloRicchi.Models
         public string Nome { get; set; }
 
         public string Cognome { get; set; }
+
+        public int NumeroStanza { get; set; }
     }
 }
