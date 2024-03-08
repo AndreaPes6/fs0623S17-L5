@@ -1,0 +1,53 @@
+﻿@model List<HotelSoloRicchi.Models.Prenotazione>
+@using HotelSoloRicchi.Models
+
+@{
+    ViewBag.Title = "Prenotazioni";
+}
+
+<h2>Prenotazioni</h2>
+
+@if (Model.Count == 0)
+{
+    <h3>Non ci sono prenotazioni al momento</h3>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Cliente</th>
+                <th>Id Stanza</th>
+                <th>Anno</th>
+                <th>Numero Prenotazione</th>
+                <th>Data Prenotazione</th>
+                <th>Check-in</th>
+                <th>Check-out</th>
+                <th>Caparra</th>
+                <th>Tariffa</th>
+                <th>Pensione o Mezza</th>
+                <th>Colazione</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var prenotazione in Model)
+            {
+                <tr>
+                    <td>@prenotazione.Id</td>
+                    <td>@prenotazione.Nome @prenotazione.Cognome</td>
+                    <td>@prenotazione.IdStanza</td>
+                    <td>@prenotazione.Anno</td>
+                    <td>@prenotazione.NumeroPrenotazione</td>
+                    <td>@prenotazione.DataPrenotazione.ToShortDateString()</td>
+                    <td>@prenotazione.CheckIn.ToShortDateString()</td>
+                    <td>@prenotazione.CheckOut.ToShortDateString()</td>
+                    <td>@prenotazione.Caparra</td>
+                    <td>@prenotazione.Tariffa</td>
+                    <td>@(prenotazione.PensioneOmezza ? "Pensione" : "Mezza")</td>
+                    <td>@(prenotazione.Colazione ? "Sì" : "No")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
