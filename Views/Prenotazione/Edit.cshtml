@@ -1,0 +1,84 @@
+﻿@model HotelSoloRicchi.Models.Prenotazione
+
+@{
+    ViewBag.Title = "Modifica Prenotazione";
+}
+
+<h2>Modifica Prenotazione</h2>
+
+@using (Html.BeginForm("Edit", "Prenotazione", FormMethod.Post, new { novalidate = "true", id = "PrenotazioneForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="mb-3">
+        @Html.LabelFor(model => model.IdCliente, new { htmlAttributes = new { @class = "form-label" } })
+        @Html.TextBoxFor(model => model.IdCliente, new { @class = $"form-control {(ViewData.ModelState.IsValidField("IdCliente") ? "" : "is-invalid")}" })
+        @Html.ValidationMessageFor(model => model.IdCliente, null, new { htmlAttributes = new { @class = "invalid-feedback" } })
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(model => model.IdStanza, new { htmlAttributes = new { @class = "form-label" } })
+        @Html.TextBoxFor(model => model.IdStanza, new { @class = $"form-control {(ViewData.ModelState.IsValidField("IdStanza") ? "" : "is-invalid")}" })
+        @Html.ValidationMessageFor(model => model.IdStanza, null, new { htmlAttributes = new { @class = "invalid-feedback" } })
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(model => model.Anno, new { htmlAttributes = new { @class = "form-label" } })
+        @Html.TextBoxFor(model => model.Anno, new { @class = $"form-control {(ViewData.ModelState.IsValidField("Anno") ? "" : "is-invalid")}" })
+        @Html.ValidationMessageFor(model => model.Anno, null, new { htmlAttributes = new { @class = "invalid-feedback" } })
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(model => model.NumeroPrenotazione, new { htmlAttributes = new { @class = "form-label" } })
+        @Html.TextBoxFor(model => model.NumeroPrenotazione, new { @class = $"form-control {(ViewData.ModelState.IsValidField("NumeroPrenotazione") ? "" : "is-invalid")}" })
+        @Html.ValidationMessageFor(model => model.NumeroPrenotazione, null, new { htmlAttributes = new { @class = "invalid-feedback" } })
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(model => model.DataPrenotazione, new { htmlAttributes = new { @class = "form-label" } })
+        @Html.TextBoxFor(model => model.DataPrenotazione, new { @class = $"form-control {(ViewData.ModelState.IsValidField("DataPrenotazione") ? "" : "is-invalid")}", type = "date" })
+        @Html.ValidationMessageFor(model => model.DataPrenotazione, null, new { htmlAttributes = new { @class = "invalid-feedback" } })
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(model => model.CheckIn, new { htmlAttributes = new { @class = "form-label" } })
+        @Html.TextBoxFor(model => model.CheckIn, new { @class = $"form-control {(ViewData.ModelState.IsValidField("CheckIn") ? "" : "is-invalid")}", type = "datetime-local" })
+        @Html.ValidationMessageFor(model => model.CheckIn, null, new { htmlAttributes = new { @class = "invalid-feedback" } })
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(model => model.CheckOut, new { htmlAttributes = new { @class = "form-label" } })
+        @Html.TextBoxFor(model => model.CheckOut, new { @class = $"form-control {(ViewData.ModelState.IsValidField("CheckOut") ? "" : "is-invalid")}", type = "datetime-local" })
+        @Html.ValidationMessageFor(model => model.CheckOut, null, new { htmlAttributes = new { @class = "invalid-feedback" } })
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(model => model.Caparra, new { htmlAttributes = new { @class = "form-label" } })
+        @Html.TextBoxFor(model => model.Caparra, new { @class = $"form-control {(ViewData.ModelState.IsValidField("Caparra") ? "" : "is-invalid")}" })
+        @Html.ValidationMessageFor(model => model.Caparra, null, new { htmlAttributes = new { @class = "invalid-feedback" } })
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(model => model.Tariffa, new { htmlAttributes = new { @class = "form-label" } })
+        @Html.TextBoxFor(model => model.Tariffa, new { @class = $"form-control {(ViewData.ModelState.IsValidField("Tariffa") ? "" : "is-invalid")}" })
+        @Html.ValidationMessageFor(model => model.Tariffa, null, new { htmlAttributes = new { @class = "invalid-feedback" } })
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(model => model.PensioneOmezza, new { htmlAttributes = new { @class = "form-label" } })
+        @Html.CheckBoxFor(model => model.PensioneOmezza, new { @class = $"form-check-input {(ViewData.ModelState.IsValidField("PensioneOmezza") ? "" : "is-invalid")}" })
+        @Html.ValidationMessageFor(model => model.PensioneOmezza, null, new { htmlAttributes = new { @class = "invalid-feedback" } })
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(model => model.Colazione, new { htmlAttributes = new { @class = "form-label" } })
+        @Html.CheckBoxFor(model => model.Colazione, new { @class = $"form-check-input {(ViewData.ModelState.IsValidField("Colazione") ? "" : "is-invalid")}" })
+        @Html.ValidationMessageFor(model => model.Colazione, null, new { htmlAttributes = new { @class = "invalid-feedback" } })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Modifica</button>
+}
+
+}

@@ -10,7 +10,7 @@
 <div class="container p-0">
     <div class="row">
         <div class="col-md-12">
-            <a href="@Url.Action("Add", "Cliente", new { area = "" })" class="btn btn-primary">Aggiungi Prenotazione</a>
+            <a href="@Url.Action("Add", "Cliente", new { area = "" })" class="btn btn-primary">Aggiungi Cliente</a>
         </div>
     </div>
 </div>
@@ -35,6 +35,7 @@
                             <th scope="col">Provincia</th>
                             <th scope="col">Città</th>
                             <th scope="col">Numero di Telefono</th>
+                            <th scope="col">Azioni</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,6 +50,17 @@
                                 <td>@cliente.Provincia</td>
                                 <td>@cliente.Città</td>
                                 <td>@cliente.NumeroTelefono</td>
+                                <td>
+                                    <a href="@Url.Action("Edit", "Cliente", new { id = cliente.Id })" class="btn btn-primary">Modifica</a>
+                                </td>
+                                <td>
+                                    <form action="@Url.Action("Delete", "Cliente", new { id = cliente.Id })" method="post">
+                                        @Html.HttpMethodOverride(HttpVerbs.Delete)
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Sei sicuro di voler eliminare questo cliente?')">Elimina</button>
+                                    </form>
+                                </td>
+
                             </tr>
                         }
                     </tbody>
