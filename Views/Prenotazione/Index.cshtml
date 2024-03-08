@@ -39,6 +39,7 @@ else
                     <th>Colazione</th>
                     <th>Modifica</th>
                     <th>Elimina</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -50,9 +51,9 @@ else
                         <td>@prenotazione.IdStanza</td>
                         <td>@prenotazione.Anno</td>
                         <td>@prenotazione.NumeroPrenotazione</td>
-                        <td>@prenotazione.DataPrenotazione.ToShortDateString()</td>
-                        <td>@prenotazione.CheckIn.ToShortDateString()</td>
-                        <td>@prenotazione.CheckOut.ToShortDateString()</td>
+                        <td>@prenotazione.DataPrenotazione</td>
+                        <td>@prenotazione.CheckIn</td>
+                        <td>@prenotazione.CheckOut</td>
                         <td>@prenotazione.Caparra</td>
                         <td>@prenotazione.Tariffa</td>
                         <td>@(prenotazione.PensioneOmezza ? "Pensione" : "Mezza")</td>
