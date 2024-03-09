@@ -13,6 +13,7 @@ namespace HotelSoloRicchi.Controllers
 {
     public class PrenotazioneController : Controller
     {
+        public List<ServiziAggiuntivi> ServiziAggiuntivi { get; set; }
 
         public ActionResult Index()
         {
@@ -207,7 +208,6 @@ namespace HotelSoloRicchi.Controllers
                 return RedirectToAction("Index");
             }
         }
-
         public ActionResult Checkout(int id)
         {
             string connString = ConfigurationManager.ConnectionStrings["HotelSoloRicchiDB"].ToString();
@@ -246,13 +246,30 @@ namespace HotelSoloRicchi.Controllers
                 }
                 reader.Close();
 
-                decimal sommaTotale = prenotazione.Tariffa - prenotazione.Caparra;
+                decimal costoServiziAggiuntivi = 0;
+                command = new SqlCommand(@"
+            SELECT Prezzo
+            FROM ServiziAggiuntivi
+            WHERE IDPrenotazione = @prenotazioneid
+        ", conn);
+                command.Parameters.AddWithValue("@prenotazioneid", id);
+
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    costoServiziAggiuntivi += (decimal)reader["Prezzo"];
+                }
+                reader.Close();
+
+
+                decimal sommaTotale = prenotazione.Tariffa - prenotazione.Caparra + costoServiziAggiuntivi;
 
                 ViewBag.SommaTotale = sommaTotale;
 
                 return View(prenotazione);
             }
         }
+
 
 
 
