@@ -22,6 +22,7 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Stanze", "Index", "Stanze", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Servizi Aggiuntivi", "Index", "ServiziAggiuntivi", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Clienti", "Index", "Cliente", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Prenotazione", "Index", "Prenotazione", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Profilo", "BackOffice", "Login", new { area = "" }, new { @class = "nav-link" })</li>

@@ -19,7 +19,6 @@ namespace HotelSoloRicchi.Controllers
             string connString = ConfigurationManager.ConnectionStrings["HotelSoloRicchiDB"].ToString();
             var conn = new SqlConnection(connString);
             conn.Open();
-            // TODO: fare la paginazione
             var command = new SqlCommand(@"
         SELECT Prenotazione.*, Clienti.Nome, Clienti.Cognome
         FROM Prenotazione
@@ -216,14 +215,12 @@ namespace HotelSoloRicchi.Controllers
             {
                 conn.Open();
 
-                // Creare il comando per ottenere i dettagli della prenotazione
                 var command = new SqlCommand(@"
             SELECT * FROM Prenotazione
             WHERE ID = @prenotazioneid
         ", conn);
                 command.Parameters.AddWithValue("@prenotazioneid", id);
 
-                // Eseguire il DataReader per ottenere i dettagli della prenotazione
                 var reader = command.ExecuteReader();
 
                 if (!reader.HasRows)
@@ -247,14 +244,10 @@ namespace HotelSoloRicchi.Controllers
                     prenotazione.PensioneOmezza = (bool)reader["PensioneOmezza"];
                     prenotazione.Colazione = (bool)reader["Colazione"];
                 }
-
-                // Chiudere il DataReader
                 reader.Close();
 
-                // Calcola la somma totale (Tariffa - Caparra)
                 decimal sommaTotale = prenotazione.Tariffa - prenotazione.Caparra;
 
-                // Aggiungi la somma totale alla vista
                 ViewBag.SommaTotale = sommaTotale;
 
                 return View(prenotazione);

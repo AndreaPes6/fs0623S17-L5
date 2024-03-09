@@ -7,25 +7,24 @@
 
 <h2>Stanze dell'hotel</h2>
 
-    <table class="table">
-        <thead>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Tipologia</th>
+            <th>Descrizione</th>
+            <th>Numero Stanza</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var prenotazione in Model)
+        {
             <tr>
-                <th>Id</th>
-                <th>Tipologia</th>
-                <th>Descrizione</th>
-                <th>Numero Stanza</th>
+                <td>@prenotazione.Id</td>
+                <td>@(prenotazione.Tipologia ? "Matrimoniale" : "Singola")</td>
+                <td>@prenotazione.Descrizione</td>
+                <td>@prenotazione.NumeroStanza</td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var prenotazione in Model)
-            {
-                <tr>
-                    <td>@prenotazione.Id</td>
-                    <td>@(prenotazione.Tipologia ? "Matrimoniale" : "Singola")</td>
-                    <td>@prenotazione.Descrizione</td>
-                    <td>@prenotazione.NumeroStanza</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-
+        }
+    </tbody>
+</table>

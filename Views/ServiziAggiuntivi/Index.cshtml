@@ -1,0 +1,62 @@
+﻿@model List<HotelSoloRicchi.Models.ServiziAggiuntivi>
+@using HotelSoloRicchi.Models
+
+@{
+    ViewBag.Title = "Servizi Aggiuntivi";
+}
+
+<h2>Servizi Aggiuntivi</h2>
+
+<div class="container p-0">
+    <div class="row">
+        <div class="col-md-12">
+            <a href="@Url.Action("Add", "ServiziAggiuntivi", new { area = "" })" class="btn btn-primary">Aggiungi Servizio Aggiuntivo</a>
+        </div>
+    </div>
+</div>
+
+@if (Model.Count == 0)
+{
+    <h3>Non ci sono servizi aggiuntivi al momento</h3>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ID Prenotazione</th>
+                    <th>Servizio</th>
+                    <th>Quantità</th>
+                    <th>Data</th>
+                    <th>Prezzo</th>
+                    <th>Modifica</th>
+                    <th>Elimina</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var servizio in Model)
+                {
+                    <tr>
+                        <td>@servizio.ID</td>
+                        <td>@servizio.IDPrenotazione</td>
+                        <td>@servizio.Servizio</td>
+                        <td>@servizio.Quantità</td>
+                        <td>@servizio.Data</td>
+                        <td>@servizio.Prezzo</td>
+                        <td>
+                            <a href="@Url.Action("Edit", "ServiziAggiuntivi", new { id = servizio.ID })" class="btn btn-primary">Modifica</a>
+                        </td>
+                        <td>
+                            <form action="@Url.Action("Delete", "ServiziAggiuntivi", new { id = servizio.ID })" method="post">
+                                @Html.HttpMethodOverride(HttpVerbs.Delete)
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Sei sicuro di voler eliminare questo servizio aggiuntivo?')">Elimina</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
