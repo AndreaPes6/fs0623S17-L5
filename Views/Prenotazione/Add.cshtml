@@ -36,22 +36,22 @@
         @Html.ValidationMessageFor(model => model.NumeroPrenotazione, "", new { @class = "text-danger" })
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.DataPrenotazione, "Data Prenotazione")
-        @Html.TextBoxFor(model => model.DataPrenotazione, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
-        @Html.ValidationMessageFor(model => model.DataPrenotazione, "", new { @class = "text-danger" })
+    <div class="mb-3">
+        @Html.LabelFor(model => model.DataPrenotazione, new { htmlAttributes = new { @class = "form-label" } })
+        @Html.TextBoxFor(model => model.DataPrenotazione, new { @class = $"form-control {(ViewData.ModelState.IsValidField("DataPrenotazione") ? "" : "is-invalid")}", type = "datetime-local" })
+        @Html.ValidationMessageFor(model => model.DataPrenotazione, null, new { htmlAttributes = new { @class = "invalid-feedback" } })
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.CheckIn, "Check-in")
-        @Html.TextBoxFor(model => model.CheckIn, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
-        @Html.ValidationMessageFor(model => model.CheckIn, "", new { @class = "text-danger" })
+    <div class="mb-3">
+        @Html.LabelFor(model => model.CheckIn, new { htmlAttributes = new { @class = "form-label" } })
+        @Html.TextBoxFor(model => model.CheckIn, new { @class = $"form-control {(ViewData.ModelState.IsValidField("CheckIn") ? "" : "is-invalid")}", type = "datetime-local" })
+        @Html.ValidationMessageFor(model => model.CheckIn, null, new { htmlAttributes = new { @class = "invalid-feedback" } })
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.CheckOut, "Check-out")
-        @Html.TextBoxFor(model => model.CheckOut, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
-        @Html.ValidationMessageFor(model => model.CheckOut, "", new { @class = "text-danger" })
+    <div class="mb-3">
+        @Html.LabelFor(model => model.CheckOut, new { htmlAttributes = new { @class = "form-label" } })
+        @Html.TextBoxFor(model => model.CheckOut, new { @class = $"form-control {(ViewData.ModelState.IsValidField("CheckOut") ? "" : "is-invalid")}", type = "datetime-local" })
+        @Html.ValidationMessageFor(model => model.CheckOut, null, new { htmlAttributes = new { @class = "invalid-feedback" } })
     </div>
 
     <div class="form-group">

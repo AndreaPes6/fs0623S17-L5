@@ -13,7 +13,7 @@
     </tr>
     <tr>
         <th>Periodo</th>
-        <td>@Model.CheckIn.ToShortDateString() - @Model.CheckOut.ToShortDateString()</td>
+        <td>@Model.CheckIn - @Model.CheckOut</td>
     </tr>
     <tr>
         <th>Tariffa Applicata</th>
@@ -41,7 +41,7 @@
     </tr>
 </table>
 
-<form action="@Url.Action("Index", "Prenotazione", new { id = Model.Id })" method="post">
+<form action="@Url.Action("Delete", "Prenotazione", new { id = Model.Id })" method="post">
     @Html.HttpMethodOverride(HttpVerbs.Delete)
-    <button type="submit" class="btn btn-success">Conferma Checkout</button>
+    <button type="submit" class="btn btn-success" >Conferma Checkout</button>
 </form>
